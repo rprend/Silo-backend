@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 parser = CSVParser();
 
-@app.rout('/')
+@app.route('/')
 def h():
     return "H"
 

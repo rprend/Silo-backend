@@ -13,7 +13,6 @@ class CSVParser():
 
         self.sus = 877
         self.eff = 692
-
         
         for line in amp_names:
             amp_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
@@ -24,6 +23,8 @@ class CSVParser():
             water_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
             self.water_csvs.append(water_draw)
 
+        self.power_over_time()
+        self.water_over_time()
     
         self.aggregate_power()
         self.aggregate_water()
@@ -42,29 +43,44 @@ class CSVParser():
         for room in self.amp_csvs:
             power_consumption = room.groupby(by="room_id")
 
-            return list([power_consumption.get_group(x) for x in power_consumption.groups][random.randrange(3)]["amp_draw"].to_json())
+            ret_list = list([power_consumption.get_group(x) for x in power_consumption.groups][random.randrange(3)]["amp_draw"].to_json())
+
+        with open('power_over_time.json', 'w') as f:
+                json.dump(ret_list, f)
+
 
     def water_over_time(self):
         for room in self.water_csvs:
             water_consumption = room.groupby(by="room_id")
 
-            return list([water_consumption.get_group(x) for x in water_consumption.groups][random.randrange(3)]["water_today"])
+            ret_list = list([water_consumption.get_group(x) for x in water_consumption.groups][random.randrange(3)]["water_today"])
+
+        with open('water_over_time.json', 'w') as f:
+                json.dump(ret_list, f)
+
         
     def get_layout(self, layout_name):
+    
+        with open('water_over_time.json') as water_file:
+            water_data = json.load(water_file)
+
+        with open('power_over_time.json') as power_file:
+            power_data = json.load(power_file)
+
         return {layout_name: {
             "sustainability": self.sus,
             "efficiency": self.eff,
             "variables": {
-                "water": self.water_over_time(),
-                "power": self.power_over_time()
+                "water": water_data,
+                "power": power_data
             }
         },
         "Layout2": {
             "sustainability": random.randrange(600, 900),
             "efficiency": random.randrange(550, 800),
             "variables": {
-                "water": self.water_over_time(),
-                "power": self.power_over_time()
+                "water": water_data,
+                "power": power_data
             }
         }}
             

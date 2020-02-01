@@ -1,5 +1,1 @@
 data/poultry1/poultry_cooling_measured_amp_draw.csv
-data/poultry1/poultry_fan_measured_ampdraw.csv
-data/poultry1/poultry_heating_measured_ampdraw.csv
-data/poultry1/poultry_inlet_measured_amp_draw.csv
-data/poultry1/poultry_light_measured_amp_draw.csv

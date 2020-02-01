@@ -14,14 +14,14 @@ class CSVParser():
         self.sus = 877
         self.eff = 692
         
-        for line in amp_names:
-            amp_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
-            self.amp_csvs.append(amp_draw)
-            self.amp_length = 0
+#        for line in amp_names:
+#            amp_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
+#            self.amp_csvs.append(amp_draw)
+#            self.amp_length = 0
     
-        for line in water_names:
-            water_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
-            self.water_csvs.append(water_draw)
+#        for line in water_names:
+#            water_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
+#            self.water_csvs.append(water_draw)
 
 #        self.power_over_time()
  #       self.water_over_time()

@@ -9,6 +9,10 @@ app = Flask(__name__)
 
 parser = CSVParser();
 
+@app.rout('/')
+def h():
+    return "H"
+
 @app.route('/welcome')
 def hello():
     return 'hello'

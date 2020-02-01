@@ -23,11 +23,11 @@ class CSVParser():
             water_draw = pd.DataFrame(pd.read_csv(line.split()[0]))
             self.water_csvs.append(water_draw)
 
-        self.power_over_time()
-        self.water_over_time()
+#        self.power_over_time()
+ #       self.water_over_time()
     
-        self.aggregate_power()
-        self.aggregate_water()
+ #       self.aggregate_power()
+ #       self.aggregate_water()
     
     def aggregate_power(self):
         self.total_amps = self.amp_csvs[0].groupby(by="room_id").sum()
